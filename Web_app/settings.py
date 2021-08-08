@@ -136,7 +136,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '355512972704905'  # App ID
+SOCIAL_AUTH_FACEBOOK_KEY = 355512972704905  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c105dc6e4bf8b3f57a48558246251cb3'  # App Secret
 
 django_heroku.settings((locals()))
