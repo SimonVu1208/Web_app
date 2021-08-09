@@ -2,3 +2,6 @@ django
 gunicorn
 django-heroku
 social-auth-app-django
+dj-database-url
+psycopg2
+gdal = 2.3.3

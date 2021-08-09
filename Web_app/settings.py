@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import django_heroku
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'social_django',
+    'memories',
     'Web_app'
 ]
 
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'Web_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'Web_app',
+        'USER': 'user001',
+        'PASSWORD': '123456789',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -136,8 +143,11 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = 355512972704905  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'c105dc6e4bf8b3f57a48558246251cb3'  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = "355512972704905"  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = "c105dc6e4bf8b3f57a48558246251cb3"  # App Secret
+SOCIAL_AUTH_PIPELINE = "Web_app.pipelines.save_profile_picture"   # Save profile pic
 
 django_heroku.settings((locals()))
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
